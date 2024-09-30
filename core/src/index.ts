@@ -1,4 +1,4 @@
-// src\index.ts
+// src/index.ts
 
 import express from "express";
 import dotenv from "dotenv";
@@ -19,9 +19,15 @@ app.use(morgan("dev"));
 // Middleware to parse JSON bodies
 app.use(express.json());
 
+// Import the search route
+import searchRoute from "./routes/search.js";
+
 // Define a simple route
 app.get("/", (req, res) => {
   res.send("Hello, TypeScript with Express!");
 });
+
+// Use the search route
+app.use("/search", searchRoute);
 
 export default app;
