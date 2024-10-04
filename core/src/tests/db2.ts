@@ -1,5 +1,7 @@
+import { log } from "console";
 import { config as dotenvConfig } from "dotenv";
 import sql from "mssql";
+import { Table } from "../model/Table.js";
 
 // Load environment variables from .env file
 dotenvConfig();
@@ -33,6 +35,7 @@ async function connectAndQuery(): Promise<void> {
 
     // Execute the query
     const resultSet = await poolConnection.request().query(query);
+    console.log(resultSet);
 
     console.log(`${resultSet.recordset.length} rows returned.`);
 
@@ -40,10 +43,12 @@ async function connectAndQuery(): Promise<void> {
     const columns = Object.keys(resultSet.recordset.columns).join(", ");
     console.log(columns);
 
+    const table = new Table(resultSet.recordset);
+    table.printTable();
     // Output row contents from the default recordset
-    resultSet.recordset.forEach((row: { ID: string; Name: string }) => {
-      console.log(`${row.ID}\t${row.Name}`);
-    });
+    // resultSet.recordset.forEach((row: { ID: string; Name: string }) => {
+    //   console.log(`${row.ID}\t${row.Name}`);
+    // });
 
     // Close the connection when finished
     await poolConnection.close();
