@@ -36,7 +36,9 @@
    "scripts": {
       "lint": "eslint . --ext .ts",
       "format": "prettier --write 'src/**/*.ts'",
-      "start": "ts-node src/index.ts",
-      "typeorm": "typeorm-ts-node-commonjs"
+      "typeorm": "typeorm-ts-node-commonjs",
+      "dev": "nodemon --exec \"npx tsx src/server.ts \"  ",
+      "start": "node ./build/server.js",
+      "build": "tsc"
    }
 }
