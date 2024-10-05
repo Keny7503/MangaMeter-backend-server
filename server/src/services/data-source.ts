@@ -1,6 +1,6 @@
 import "reflect-metadata"
 import { DataSource } from "typeorm"
-import { UserTest } from "../entity/UserTest"
+import { UserTest } from "../entity/Manga"
 require('dotenv').config()
 
 export const AppDataSource = new DataSource({
