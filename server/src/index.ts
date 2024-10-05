@@ -5,8 +5,10 @@ const express = require('express')
 const dotenv = require("dotenv");
 const morgan = require("morgan");
 const helmet = require("helmet");
+const cors = require("cors");
 dotenv.config();
 const app = express()
+app.use(cors());
 
 // Use Helmet for setting security-related HTTP headers
 app.use(helmet());
