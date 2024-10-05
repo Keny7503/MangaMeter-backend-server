@@ -13,7 +13,7 @@ export class User {
 
     // Many-to-many relationship with Manga (favorites)
     @ManyToMany(() => Manga, manga => manga.users)
-    favoriteManga: Manga[]
+    favoriteMangas: Manga[]
 
     // One-to-many relationship with Rating
     @OneToMany(() => Rating, rating => rating.user)

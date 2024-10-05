@@ -13,7 +13,7 @@ export class Manga {
     Name: string
 
     // Many-to-many relationship with Genre
-    @ManyToMany(() => Genre, genre => genre.manga)
+    @ManyToMany(() => Genre, genre => genre.mangas)
     @JoinTable({
         name: "MangaGenres", // Join table name for Manga and Genre
         joinColumn: { name: "MangaID", referencedColumnName: "id" },
@@ -22,7 +22,7 @@ export class Manga {
     genres: Genre[]
 
     // Many-to-many relationship with User (favorites)
-    @ManyToMany(() => User, user => user.favoriteManga)
+    @ManyToMany(() => User, user => user.favoriteMangas)
     @JoinTable({
         name: "FavoriteList", // Join table for Manga and User favorites
         joinColumn: { name: "MangaID", referencedColumnName: "id" },

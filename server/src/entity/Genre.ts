@@ -12,5 +12,5 @@ export class Genre {
 
     // Many-to-many relationship with Manga
     @ManyToMany(() => Manga, manga => manga.genres)
-    manga: Manga[]
+    mangas: Manga[]
 }

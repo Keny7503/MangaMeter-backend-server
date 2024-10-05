@@ -1,7 +1,11 @@
 import "reflect-metadata"
 import { DataSource } from "typeorm"
-import { UserTest } from "../entity/Manga"
+import { Genre } from "../entity/Genre"
+import { Manga } from "../entity/Manga"
+import { Rating } from "../entity/Rating"
+import { User } from "../entity/User"
 require('dotenv').config()
+
 
 export const AppDataSource = new DataSource({
     type: "mssql",
@@ -12,7 +16,7 @@ export const AppDataSource = new DataSource({
     database: process.env.DB_DATABASE,
     synchronize: true,
     logging: false,
-    entities: [UserTest],
+    entities: [Genre,Manga,Rating,User],
     migrations: [],
     subscribers: [],
 })

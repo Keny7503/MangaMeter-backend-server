@@ -1,5 +1,5 @@
-// import { runDatabaseConnection } from "./services/databaseConnection";
-// runDatabaseConnection;
+import { runDatabaseConnection } from "./services/databaseConnection";
+runDatabaseConnection;
 
 const express = require('express')
 const dotenv = require("dotenv");
@@ -7,7 +7,7 @@ const morgan = require("morgan");
 const helmet = require("helmet");
 dotenv.config();
 const app = express()
-const port = 3000
+
 // Use Helmet for setting security-related HTTP headers
 app.use(helmet());
 
@@ -19,8 +19,9 @@ app.get("/", (req, res) => {
 });
 
 import searchRoute from "./routes/search.js";
+import genreRoute from "./routes/genre.js";
 app.use("/search", searchRoute);
+app.use("/genres", genreRoute);
 
-app.listen(port, () => {
-  console.log(`Example app listening on port ${port}`)
-})
+
+export default app;
