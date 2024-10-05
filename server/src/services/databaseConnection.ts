@@ -9,7 +9,7 @@ export const runDatabaseConnection = AppDataSource.initialize().then(async () =>
     const user = new UserTest()
     user.firstName = "Timber"
     user.lastName = "Saw"
-    user.age = 25
+    user.age = 30
     await AppDataSource.manager.save(user)
     console.log("Saved a new user with id: " + user.id)
 
