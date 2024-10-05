@@ -1,5 +1,5 @@
 import { AppDataSource } from "./data-source"
-import { UserTest } from "../entity/UserTest"
+import { UserTest } from "../entity/Manga"
 require('dotenv').config()
 
 // console.log("test"+ process.env.DB_SERVER);
