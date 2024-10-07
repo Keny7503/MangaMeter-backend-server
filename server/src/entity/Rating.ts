@@ -1,4 +1,4 @@
-import { Column, Entity, JoinColumn, ManyToOne, PrimaryColumn } from "typeorm"
+import { Column, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn } from "typeorm"
 import { Manga } from "./Manga"
 import { User } from "./User"
 import { Genre } from "./Genre"
@@ -6,10 +6,10 @@ import { Genre } from "./Genre"
 // Rating entity
 @Entity()
 export class Rating {
-    @PrimaryColumn()
+    @PrimaryGeneratedColumn('uuid')
     id: string
 
-    @Column()
+    @Column('int')
     RatingScore: number
 
     // Many-to-one relationship with Manga

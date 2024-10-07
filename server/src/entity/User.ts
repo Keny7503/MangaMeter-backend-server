@@ -1,14 +1,14 @@
-import { Column, Entity, ManyToMany, OneToMany, PrimaryColumn } from "typeorm"
+import { Column, Entity, ManyToMany, OneToMany, PrimaryGeneratedColumn } from "typeorm"
 import { Manga } from "./Manga"
 import { Rating } from "./Rating"
 
 // User entity
 @Entity()
 export class User {
-    @PrimaryColumn()
+    @PrimaryGeneratedColumn('uuid')
     id: string
 
-    @Column()
+    @Column('varchar', { length: 255 })
     Name: string
 
     // Many-to-many relationship with Manga (favorites)

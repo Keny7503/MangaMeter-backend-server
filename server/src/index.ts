@@ -1,5 +1,5 @@
-import { runDatabaseConnection } from "./services/databaseConnection";
-runDatabaseConnection;
+// import { runDatabaseConnection } from "./services/databaseConnection";
+// runDatabaseConnection;
 
 const express = require('express')
 const dotenv = require("dotenv");
@@ -22,8 +22,11 @@ app.get("/", (req, res) => {
 
 import searchRoute from "./routes/search.js";
 import genreRoute from "./routes/genre.js";
+import searchMangeID from "./routes/searchMangaByID";
 app.use("/search", searchRoute);
-app.use("/genres", genreRoute);
+// app.use("/genres", genreRoute);
+app.use("/searchMangaID", searchMangeID);
+
 
 
 export default app;

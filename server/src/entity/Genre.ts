@@ -4,10 +4,10 @@ import { Manga } from "./Manga"
 // Genre entity
 @Entity()
 export class Genre {
-    @PrimaryColumn()
+    @PrimaryColumn('varchar', { length: 255 })
     id: string
 
-    @Column()
+    @Column('varchar', { length: 255 })
     Name: string
 
     // Many-to-many relationship with Manga
