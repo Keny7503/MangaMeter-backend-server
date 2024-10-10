@@ -23,9 +23,11 @@ app.get("/", (req, res) => {
 import searchRoute from "./routes/search.js";
 import genreRoute from "./routes/genre.js";
 import searchMangeID from "./routes/searchMangaByID";
+import searchByNameRoute from "./routes/searchByName"
 app.use("/search", searchRoute);
 // app.use("/genres", genreRoute);
 app.use("/searchMangaID", searchMangeID);
+app.use("/searchTitle", searchByNameRoute);
 
 
 
