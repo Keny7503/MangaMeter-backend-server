@@ -1,6 +1,5 @@
+import axios from 'axios';
 const title = 'Kanojyo to Himitsu to Koimoyou';
-
-import axios from "axios";
 
 const baseUrl = 'https://api.mangadex.org';
 
