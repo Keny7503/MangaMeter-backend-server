@@ -1,0 +1,5 @@
+# Ignore the dist directory
+dist/
+
+# Ignore the .env file
+.env
