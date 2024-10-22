@@ -3,6 +3,7 @@ import express, { Application, Request, Response, NextFunction } from 'express';
 import cors from 'cors';
 import morgan from 'morgan';
 import http from 'http';
+require('dotenv').config();
 
 const App: Application = express();
 
@@ -35,5 +36,10 @@ export function testfn(){
     return '123';
 }
 
+import { fetchGenres } from './services/genreList';
+(async () => {
+  // Test the fetchGenres function locally
+  await fetchGenres();
+})();
 // expose app
 export default App;
