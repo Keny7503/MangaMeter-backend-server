@@ -5,7 +5,7 @@ import { Router } from 'express';
 const router = Router();
 
 // Define the route to fetch all genres and insert them into the Supabase database
-router.post("/", async (req, res) => {
+router.get("/", async (req, res) => {
     try {
         const genres = await updateGenres();
         
@@ -19,19 +19,23 @@ router.post("/", async (req, res) => {
         res.status(200).json(genres);
 
         const insertions = genres.map(async (element) => {
-            const { error } = await supabase
-                .from('Genre')
-                .insert({ id: element.id, name: element.name });
-            
-            if (error) {
-                console.error(`Failed to insert genre with id ${element.id}:`, error);
-            }
-            else{
-                console.log("import genre ",element.name," with id ",element.id);
+            try {
+                const { error } = await supabase
+                    .from('genre')
+                    .insert({ id: element.id, name: element.name });
+        
+                if (error) {
+                    console.error(`Failed to insert genre ${element.name} with id ${element.id}.`, error);
+                } else {
+                    console.log(`Successfully imported genre ${element.name} with id ${element.id}`);
+                }
+            } catch (err) {
+                console.error(`Unexpected error inserting genre ${element.name} with id ${element.id}:`, err);
             }
         });
+        
 
-        await Promise.all(insertions);
+        // await Promise.all(insertions);
     } catch (error) {
         console.error("Error fetching genres:", error);
         res.status(500).json({ error: "Failed to fetch genres", details: error });
