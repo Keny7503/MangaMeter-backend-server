@@ -6,7 +6,7 @@ export async function updateGenres() {
         const genres: { id: any; name: any }[] = [];
         var countG=0;
         // Log the data to verify its structure
-        console.log("Fetched data:", data);
+        // console.log("Fetched data:", data);
 
         // Check if data is an array
         if (Array.isArray(data)) {

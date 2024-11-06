@@ -3,6 +3,8 @@ import searchByNameRoutes from './routes/searchByNameRoute';
 import genreRoutes from './routes/genreRoutes'; 
 import genreUpdateRoutes from './routes/genreUpdateRoutes';
 import textRoutes from './routes/textRoutes';
+import addMangaRoutes from './routes/addMangaRoutes';
+import addRatingRoutes from './routes/addRatingRoutes';
 
 export default (app: Application) => {
   // Define your routes here
@@ -12,5 +14,7 @@ export default (app: Application) => {
   app.use('/manga/search', searchByNameRoutes);
   app.use('/genres', genreRoutes);
   app.use('/genreUpdate',genreUpdateRoutes);
-  app.use('/test', textRoutes)
+  app.use('/addManga', addMangaRoutes);
+  app.use('/addRating',addRatingRoutes);
+  app.use('/test', textRoutes);
 };
