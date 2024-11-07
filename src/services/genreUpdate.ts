@@ -6,7 +6,7 @@ export async function updateGenres() {
         const genres: { id: any; name: any }[] = [];
         var countG=0;
         // Log the data to verify its structure
-        console.log("Fetched data:", data);
+        // console.log("Fetched data:", data);
 
         // Check if data is an array
         if (Array.isArray(data)) {
@@ -22,8 +22,8 @@ export async function updateGenres() {
         }
 
         // Print the filtered genres to the console
-        console.log("updateGenres:", genres);
-        console.log("count: ",countG);
+        // console.log("updateGenres:", genres);
+        // console.log("count: ",countG);
 
         // Optionally return genres for further use
         return genres;
@@ -31,6 +31,3 @@ export async function updateGenres() {
         console.error("Error during updateGenres:", error);
     }
 }
-
-// Call updateGenres if this file is run directly
-updateGenres();
