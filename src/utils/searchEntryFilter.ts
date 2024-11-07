@@ -28,7 +28,12 @@ export function filterMangaDetails(manga: Manga) {
     // Extract list of genre tags
     const genreTags = manga.attributes.tags
         .filter(tag => tag.attributes.group === "genre")
-        .map(tag => tag.attributes.name.en);
+        .map(tag => 
+            ({
+                id: tag.id,
+                name: tag.attributes.name.en
+            })
+        );
 
     // Extract ID of the "cover_art" relationship
     const coverArtId = manga.relationships.find(rel => rel.type === "cover_art")?.id;
