@@ -1,6 +1,7 @@
 import { Router } from 'express';
 import { getTheGenreId } from '../utils/getTheGenreId';
 import { addRating } from '../services/addRating';
+import { addMangaWithGenres } from '../services/addMangaWithGenres';
 
 const router = Router();
 
@@ -20,30 +21,12 @@ router.get("/", async (req, res) => {
     }
 
     try {
-        // Set up the POST request to add manga with genres and rating
-        const url = "http://localhost:3000/addManga";
-        
-        const mangaResponse = await fetch(url, {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify({
-                rating,
-                mangaName,
-                mangaId,
-                genre: genreList
-            })
-        });
+        // Call addMangaWithGenres function to add manga with genres
+        const mangaResult = await addMangaWithGenres(mangaName, mangaId, genreList);
 
-        // Check for errors in the manga response
-        if (!mangaResponse.ok) {
-            throw new Error(`Failed to add manga. Status: ${mangaResponse.status}`);
-        }
-
-        // Fetch genre IDs based on the genre names
+        // Fetch genre IDs based on the RatedManga name
         const genreData = await getTheGenreId([RatedManga]);
-        
+
         // Check if genreData contains results
         if (!genreData || genreData.length === 0) {
             res.status(404).json({ error: "Genres not found" });
@@ -53,16 +36,15 @@ router.get("/", async (req, res) => {
         // Extract the genre ID from the first item in genreData
         const genreId = genreData[0].id;
 
-        // Await the result of addRating and manga addition response
-        const addedRatingResult = await addRating(rating, mangaId, userId, genreId);
-        const addedMangaResult = await mangaResponse.json();
+        // Add the rating for the manga
+        const ratingResult = await addRating(rating, mangaId, userId, genreId);
 
         // Send a single response including both results
         res.status(200).json({
             success: true,
             data: {
-                mangaResult: addedMangaResult,
-                ratingResult: addedRatingResult
+                mangaResult: mangaResult.json,
+                ratingResult
             }
         });
 

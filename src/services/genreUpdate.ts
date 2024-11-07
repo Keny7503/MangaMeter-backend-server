@@ -1,12 +1,11 @@
 import { tagUpdate } from '../utils/tagUpdate';
+import supabase from '../utils/supabaseClient';
 
 export async function updateGenres() {
     try {
         const data = await tagUpdate();
         const genres: { id: any; name: any }[] = [];
-        var countG=0;
-        // Log the data to verify its structure
-        // console.log("Fetched data:", data);
+        let countG = 0;
 
         // Check if data is an array
         if (Array.isArray(data)) {
@@ -21,11 +20,26 @@ export async function updateGenres() {
             console.warn("Expected 'data' to be an array, but got:", typeof data);
         }
 
-        // Print the filtered genres to the console
-        // console.log("updateGenres:", genres);
-        // console.log("count: ",countG);
+        // Map through genres and attempt to insert each one
+        const insertions = genres.map(async (element) => {
+            try {
+                const { error } = await supabase
+                    .from('genre')
+                    .insert({ id: element.id, name: element.name });
+                
+                if (error) {
+                    console.error(`Failed to insert genre ${element.name} with id ${element.id}.`, error);
+                } else {
+                    console.log(`Successfully imported genre ${element.name} with id ${element.id}`);
+                }
+            } catch (err) {
+                console.error(`Unexpected error inserting genre ${element.name} with id ${element.id}:`, err);
+            }
+        });
 
-        // Optionally return genres for further use
+        // Await completion of all insertions
+        await Promise.all(insertions);
+
         return genres;
     } catch (error) {
         console.error("Error during updateGenres:", error);
