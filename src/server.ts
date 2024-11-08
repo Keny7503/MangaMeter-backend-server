@@ -19,7 +19,7 @@ App.use(
 
 // support CORS from API
 const corsOptions = {
-  origin: ['http://localhost:5173'], // Add all possible frontend localhost URLs
+  origin: ['*'], // Add all possible frontend localhost URLs
   methods: ['GET', 'POST', 'PUT', 'DELETE'],
   allowedHeaders: ['Content-Type', 'Authorization'],
   credentials: true, // if you are using cookies or authentication tokens
