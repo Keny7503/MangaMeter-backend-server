@@ -2,7 +2,7 @@ import { Router } from 'express';
 import { addManga } from '../services/addManga';
 import {getTheGenreId} from '../utils/getTheGenreId';
 import { addMangaGenreId } from '../services/addMangaGenreId';
-import { getAverGRating } from '../services/getGIdWithMId';
+import { getAverGRating } from '../services/getAverGRating';
 
 const router = Router();
 
