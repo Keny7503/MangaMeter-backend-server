@@ -1,23 +1,27 @@
 import { Router } from 'express';
 import { addMangaWithGenres } from '../services/addMangaWithGenres'; // Import the function
+import { getMangaGenre } from '../services/getMangaGenre';
 
 const router = Router();
 
 // Define a route that uses query parameters for mangaName, mangaId, and genre
 router.get("/", async (req, res) => {
-    const mangaName = req.query.mangaName as string;
     const mangaId = req.query.mangaId as string;
-    const genreList = req.query.genre as string[];
 
     // Validate query parameters
-    if (!mangaName || !mangaId || !Array.isArray(genreList)) {
-        res.status(400).json({ error: "mangaName, mangaId, and genre (as an array) are required query parameters" });
+    if (!mangaId) {
+        res.status(400).json({ error: "mangaId is required query parameters" });
         return;
     }
 
     try {
-        // Call the addMangaWithGenres function
-        const response = await addMangaWithGenres(mangaName, mangaId, genreList);
+        const response = await addMangaWithGenres(mangaId);
+        
+        // Send the response based on the result of addMangaWithGenres
+        if (!response) {
+            res.status(500).json({ error: "Failed to add manga with genres" });
+            return;
+        }
 
         // Send the response based on the result of addMangaWithGenres
         res.status(response.status).json(response.json);

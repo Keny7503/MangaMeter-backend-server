@@ -1,22 +1,21 @@
 import { Router } from 'express';
-import { getAverGRating } from '../services/getGIdWithMId'; // Import the function
+import { getAverMRating } from '../services/getAverMRating'; // Import the function
 
 const router = Router();
 
 // Define a route that uses query parameters for mangaName, mangaId, and genre
 router.get("/", async (req, res) => {
-    const genreId = req.query.genreId as string;
-    const sortDescending = Boolean(req.query.sortDescending as string);
+    const mangaId = req.query.mangaId as string;
 
     // Validate query parameters
-    if (!genreId) {
-        res.status(400).json({ error: "userId, mangaId, are required query parameters" });
+    if (!mangaId) {
+        res.status(400).json({ error: "mangaId are required query parameters" });
         return;
     }
 
     try {
         // Call the addMangaWithGenres function
-        const response = await getAverGRating(genreId,sortDescending);
+        const response = await getAverMRating(mangaId);
 
         // Send the response based on the result of addMangaWithGenres
         res.status(response.status).json(response.json);
