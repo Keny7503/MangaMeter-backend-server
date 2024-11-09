@@ -8,13 +8,13 @@ export async function getAverGRating(genreId: string, sortDescending: boolean) {
           sort_desc: sortDescending
         });
 
-            if (error) {
-                console.error("Error fetching rating genres:", error);
-                return {
-                    status: 500,
-                    json: { error: "Error fetching rating genres" }
-                };
-            }
+        if (error) {
+            console.error("Error fetching rating genres:", error);
+            return {
+                status: 500,
+                json: { error: "Error fetching rating genres" }
+            };
+        }
 
         // Print the fetched data to the console
         console.log("Fetched rating genres:", data);
