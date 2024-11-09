@@ -35,6 +35,7 @@ router.get("/", async (req, res) => {
 
         // Extract the genre ID from the first item in genreData
         const genreId = genreData[0].id;
+        console.log("rated genre id: ",genreId);
 
         // Add the rating for the manga
         const ratingResult = await addRating(rating, mangaId, userId, genreId);

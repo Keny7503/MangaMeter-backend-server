@@ -2,33 +2,42 @@ import supabase from '../utils/supabaseClient';
 
 export async function getUserMRatingWithGId(genreId: string, userId: string) {
     try {
-        const { data, error } = await supabase
-            .from('rating')
-            .select('ratingscore, votetime')
-            .eq('genreid', genreId)
-            .eq('userid', userId);
+        let data, error;
+
+        if (genreId === "all") {
+            ({ data, error } = await supabase
+                .from('rating')
+                .select('ratingscore, votetime')
+                .eq('userid', userId)
+            );
+        } else {
+            ({ data, error } = await supabase
+                .from('rating')
+                .select('ratingscore, votetime')
+                .eq('genreid', genreId)
+                .eq('userid', userId)
+            );
+        }
 
         if (error) {
-            console.error("Error fetching mangas:", error);
+            console.error("Error fetching ratings:", error);
             return {
                 status: 500,
-                json: { error: "Error fetching mangas" }
+                json: { error: "Error fetching ratings" }
             };
         }
 
-        // Print the fetched data to the console
-        console.log("Fetched mangas:", data);
+        console.log("Fetched ratings:", data);
 
-        // Return the data in the expected response format
         return {
             status: 200,
             json: { data }
         };
     } catch (error) {
-        console.error("Error during getMIdWithGId:", error);
+        console.error("Unexpected error during getUserMRatingWithGId:", error);
         return {
             status: 500,
-            json: { error: "Unexpected error during getMIdWithGId" }
+            json: { error: "Unexpected error during getUserMRatingWithGId" }
         };
     }
 }
