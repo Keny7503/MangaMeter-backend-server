@@ -1,27 +1,28 @@
 import { addManga } from './addManga';
-import { getTheGenreId } from '../utils/getTheGenreId';
 import { addMangaGenreId } from './addMangaGenreId';
+import { getMangaGenre } from './getMangaGenre';
 
-export async function addMangaWithGenres(mangaName: string, mangaId: string, genreList: string[]) {
+export async function addMangaWithGenres(mangaId: string) {
     // Validate input parameters
-    if (!mangaName || !mangaId || !Array.isArray(genreList)) {
-        throw new Error("mangaName, mangaId, and genre (as an array) are required parameters");
+    if (!mangaId) {
+        throw new Error("mangaId is required parameters");
     }
 
     try {
+        const mangaDetail = await getMangaGenre(mangaId);
+
+        // Check if result or result.mangaDetails is undefined
+        if (!mangaDetail || !mangaDetail.mangaDetails) {
+            return;
+        } 
+        // Destructure from result.mangaDetails
+        const { mangaId: detailMangaId, mangaName, genreTags } = mangaDetail.mangaDetails;
+
         // Add the manga to the database
-        await addManga(mangaId, mangaName);
-
-        // Fetch genre IDs based on the genre names
-        const genreData = await getTheGenreId(genreList);
-
-        // Check if genreData contains results
-        if (!genreData || genreData.length === 0) {
-            throw new Error("Genres not found");
-        }
+        await addManga(detailMangaId, mangaName);
 
         // Add manga with each genre ID
-        const promises = genreData.map(async (genre) => {
+        const promises = genreTags.map(async (genre) => {
             return await addMangaGenreId(mangaId, genre.id);
         });
 
@@ -34,7 +35,7 @@ export async function addMangaWithGenres(mangaName: string, mangaId: string, gen
             json: {
                 mangaName,
                 mangaId,
-                genreList,
+                genreTags,
                 addedGenres,
             }
         };
