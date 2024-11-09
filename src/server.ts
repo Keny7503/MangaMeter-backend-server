@@ -18,14 +18,8 @@ App.use(
 );
 
 // support CORS from API
-const corsOptions = {
-  origin: ['*'], // Add all possible frontend localhost URLs
-  methods: ['GET', 'POST', 'PUT', 'DELETE'],
-  allowedHeaders: ['Content-Type', 'Authorization'],
-  credentials: true, // if you are using cookies or authentication tokens
-};
+App.use(cors());
 
-App.use(cors(corsOptions));
 // Routes ==================================================
 import configureRoutes from './route';
 configureRoutes(App); // configure our routes
