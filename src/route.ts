@@ -7,7 +7,9 @@ import addMangaRoutes from './routes/addMangaRoutes';
 import addRatingRoutes from './routes/addRatingRoutes';
 import getAverGRatingRoutes from './routes/getAverGRatingRoutes';
 import getAverMRatingRoutes from './routes/getAverMRatingRoutes';
-import getUserMRatingWithGId from './routes/getUserMRatingWithGId';
+// import getUserMRatingWithGId from './routes/getUserMRatingWithGId';
+import getOneRatingRoute from './routes/getOneRatingRoute'; 
+import getRatingFromMangaUserRoute from './routes/getRatingFromMangaUserRoute'; 
 
 export default (app: Application) => {
   // Define your routes here
@@ -16,11 +18,13 @@ export default (app: Application) => {
   });
   app.use('/manga/search', searchByNameRoutes);
   app.use('/genres', genreRoutes);
+  app.use('/rating', getOneRatingRoute);
+  app.use('/rating/manga/user', getRatingFromMangaUserRoute);
   app.use('/genreUpdate',genreUpdateRoutes);
   app.use('/addManga', addMangaRoutes);
   app.use('/addRating',addRatingRoutes);
   app.use('/getAverGRating',getAverGRatingRoutes);
   app.use('/getAverMRating',getAverMRatingRoutes);
-  app.use('/getUserMRating',getUserMRatingWithGId);
+  // app.use('/getUserMRating',getUserMRatingWithGId);
   app.use('/test', textRoutes);
 };
