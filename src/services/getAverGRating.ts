@@ -1,5 +1,5 @@
 import supabase from '../utils/supabaseClient';
-import { SearchMangaByGenre } from './SearchMangaByGenre';
+import { SearchMangaByIds } from './SearchMangaByIds';
 
 export async function getAverGRating(genreId: string, sortDescending: boolean, limit: number, offset: number) {
     try {
@@ -19,9 +19,13 @@ export async function getAverGRating(genreId: string, sortDescending: boolean, l
             };
         }
 
-        // console.log("Fetched rating genres:", data);
+        console.log("Fetched rating genres:", data);
 
-        const fetch = await SearchMangaByGenre(genreId);
+        const mangaIds = data.map((element: { manga_id: any }) => String(element.manga_id));     
+
+        console.log(mangaIds);
+
+        const fetch = await SearchMangaByIds(mangaIds);
         // console.log("Fetched manga:", fetch);
         // Type check to ensure fetch has the expected structure
         if (!fetch || typeof fetch !== 'object' || !('data' in fetch) || !Array.isArray(fetch.data)) {
@@ -32,16 +36,16 @@ export async function getAverGRating(genreId: string, sortDescending: boolean, l
             };
         }
         const fetch1 = fetch.data;
-        // console.log("Fetched manga:", fetch1);
+        console.log("Fetched manga:", fetch1);
         // Create a mapping of manga_id to average_rating for easy access
         const ratingMap = data.reduce((map: { [x: string]: any; }, item: { manga_id: string | number; average_rating: any; }) => {
             map[item.manga_id] = item.average_rating;
             return map;
         }, {});
-        // console.log("Fetched ratingMap:", ratingMap);
+        console.log("Fetched ratingMap:", ratingMap);
         // Filter the manga list and add the average rating
         const filteredMangaList = fetch.data
-            .filter((manga: { mangaId: any; }) => ratingMap.hasOwnProperty(manga.mangaId))
+            // .filter((manga: { mangaId: any; }) => ratingMap.hasOwnProperty(manga.mangaId))
             .map((manga: { mangaId: string | number; }) => ({
                 ...manga,
                 average_rating: ratingMap[manga.mangaId] || null
