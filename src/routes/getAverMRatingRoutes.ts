@@ -3,7 +3,6 @@ import { getAverMRating } from '../services/getAverMRating'; // Import the funct
 
 const router = Router();
 
-// Define a route that uses query parameters for mangaName, mangaId, and genre
 router.get("/", async (req, res) => {
     const mangaId = req.query.mangaId as string;
 

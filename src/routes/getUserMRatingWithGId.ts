@@ -3,7 +3,6 @@ import { getUserMRatingWithGId } from '../services/getUserMRatingWithGId'; // Im
 
 const router = Router();
 
-// Define a route that uses query parameters for mangaName, mangaId, and genre
 router.get("/", async (req, res) => {
     const genreId = req.query.genreId as string;
     const userId = req.query.mangaName as string;
