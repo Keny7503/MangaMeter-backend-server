@@ -54,10 +54,10 @@ export async function getAverGRating(genreId: string, sortDescending: boolean, l
         console.log("Fetched filteredMangaList:", filteredMangaList);
         return {
             status: 200,
-            json: { data: {
-                filteredMangaList,
-                total: fetch.data.length
-            } }
+            json: { data: filteredMangaList,
+                total: fetch.data.length,
+                success: true
+             }
         };
     } catch (error) {
         console.error("Error during getAverGRating:", error);
