@@ -7,7 +7,7 @@ router.get("/", async (req, res) => {
     const genreId = req.query.genreId as string;
     const sortDescending = Boolean(req.query.sortDescending as string);
     const limit = parseInt(req.query.limit as string);
-    const offset = parseInt(req.query.offset as string);
+    const page = parseInt(req.query.page as string);
 
     // Validate query parameters
     if (!genreId) {
@@ -17,7 +17,7 @@ router.get("/", async (req, res) => {
 
     try {
         // Call the addMangaWithGenres function
-        const response = await getAverGRating(genreId,sortDescending,limit,offset);
+        const response = await getAverGRating(genreId,sortDescending,limit,page);
 
         // Send the response based on the result of addMangaWithGenres
         res.status(response.status).json(response.json);
