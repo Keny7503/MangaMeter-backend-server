@@ -1,14 +1,14 @@
 import supabase from '../utils/supabaseClient';
 import { SearchMangaByIds } from './SearchMangaByIds';
 
-export async function getAverGRating(genreId: string, sortDescending: boolean, limit: number, offset: number) {
+export async function getAverGRating(genreId: string, sortDescending: boolean, limit: number, page: number) {
     try {
         const { data, error } = await supabase
             .rpc('get_manga_ratings_by_genre', {
                 input_genre_id: genreId,
                 sort_desc: sortDescending,
                 limit_rows: limit,
-                offset_row: offset
+                offset_row: (page-1)*limit
             });
 
         if (error) {
@@ -35,8 +35,9 @@ export async function getAverGRating(genreId: string, sortDescending: boolean, l
                 json: { error: "Failed to retrieve manga data" }
             };
         }
-        const fetch1 = fetch.data;
-        console.log("Fetched manga:", fetch1);
+        // const fetch1 = fetch.data;
+        // console.log("Fetched manga:", fetch1);
+        // console.log("Fetched manga:", fetch1.length);
         // Create a mapping of manga_id to average_rating for easy access
         const ratingMap = data.reduce((map: { [x: string]: any; }, item: { manga_id: string | number; average_rating: any; }) => {
             map[item.manga_id] = item.average_rating;
@@ -53,7 +54,10 @@ export async function getAverGRating(genreId: string, sortDescending: boolean, l
         console.log("Fetched filteredMangaList:", filteredMangaList);
         return {
             status: 200,
-            json: { data: filteredMangaList }
+            json: { data: {
+                filteredMangaList,
+                total: fetch.data.length
+            } }
         };
     } catch (error) {
         console.error("Error during getAverGRating:", error);
