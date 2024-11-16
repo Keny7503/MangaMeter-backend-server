@@ -9,6 +9,7 @@ import {SearchMangaWithIds} from '../utils/SearchMangaWithIds';
 import { SearchMangaByIds } from '../services/SearchMangaByIds';
 import {getUserFavorite} from '../utils/getUserFavorite';
 import { SearchFavoriteManga } from '../services/SearchFavoriteManga';
+import { deleteFavoriteManga } from '../services/deleteFavoriteManga';
 
 const router = Router();
 
@@ -24,7 +25,8 @@ router.get("/", async (req, res) => {
         // const data = await SearchMangaWithIds(["d14354de-6af5-4b92-825d-47686d3fa145","f1e0fed4-2f72-43ab-8c00-58867312288d"]);
         // const data = await SearchMangaByIds(["d14354de-6af5-4b92-825d-47686d3fa145","f1e0fed4-2f72-43ab-8c00-58867312288d"]);
         // const data = await getUserFavorite("5e5d1b6b-c333-4d01-93e1-532ce98892f3",2,1);
-        const data = await SearchFavoriteManga("5e5d1b6b-c333-4d01-93e1-532ce98892f3",2,1);
+        // const data = await SearchFavoriteManga("5e5d1b6b-c333-4d01-93e1-532ce98892f3",2,1);
+        const data = await deleteFavoriteManga("8495d45a-dbba-48be-8691-7d2a067e3f42","5e5d1b6b-c333-4d01-93e1-532ce98892f3");
         console.log(data);
         res.status(200).json(data);
     } catch (error) {
