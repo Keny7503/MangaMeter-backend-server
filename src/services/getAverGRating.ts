@@ -51,10 +51,20 @@ export async function getAverGRating(genreId: string, sortDescending: boolean, l
                 ...manga,
                 average_rating: ratingMap[manga.mangaId] || null
             }));
-        console.log("Fetched filteredMangaList:", filteredMangaList);
+
+        // Sort the filteredMangaList based on the average_rating
+        console.log("sortDescending: "+sortDescending);
+        const sortedMangaList = filteredMangaList.sort((a: { average_rating: number }, b: { average_rating: number }) => {
+            if (sortDescending) {
+                return b.average_rating - a.average_rating; // Descending order
+            } else {
+                return a.average_rating - b.average_rating; // Ascending order
+            }
+        });
+        console.log("Fetched filteredMangaList:", sortedMangaList);
         return {
             status: 200,
-            json: { data: filteredMangaList,
+            json: { data: sortedMangaList,
                 total: fetch.data.length,
                 success: true
              }

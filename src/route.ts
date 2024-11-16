@@ -11,6 +11,7 @@ import getAverMRatingRoutes from './routes/getAverMRatingRoutes';
 import getOneRatingRoute from './routes/getOneRatingRoute'; 
 import getRatingFromMangaUserRoute from './routes/getRatingFromMangaUserRoute'; 
 import addFavoriteRoutes from './routes/addFavoriteRoutes'; 
+import getFavoriteManga from './routes/getFavoriteManga'; 
 
 export default (app: Application) => {
   // Define your routes here
@@ -27,6 +28,7 @@ export default (app: Application) => {
   app.use('/getAverGRating',getAverGRatingRoutes);
   app.use('/getAverMRating',getAverMRatingRoutes);
   app.use('/addFavorite',addFavoriteRoutes);
+  app.use('/getFavoriteManga',getFavoriteManga)
   // app.use('/getUserMRating',getUserMRatingWithGId);
   app.use('/test', textRoutes);
 };
