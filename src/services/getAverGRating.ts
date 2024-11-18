@@ -1,5 +1,6 @@
 import supabase from '../utils/supabaseClient';
 import { SearchMangaByIds } from './SearchMangaByIds';
+import { getRatingCountByGenre } from '../services/getRatingCountByGenre';
 
 export async function getAverGRating(genreId: string, sortDescending: boolean, limit: number, page: number) {
     try {
@@ -62,10 +63,11 @@ export async function getAverGRating(genreId: string, sortDescending: boolean, l
             }
         });
         console.log("Fetched filteredMangaList:", sortedMangaList);
+        const count = await getRatingCountByGenre(genreId);
         return {
             status: 200,
             json: { data: sortedMangaList,
-                total: fetch.data.length,
+                total: count,
                 success: true
              }
         };

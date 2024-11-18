@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import { addFavorite } from '../services/addFavorite'; // Import the function
+import { checkFavoriteExists } from '../services/checkFavoriteExist'; // Import the function
 
 const router = Router();
 
@@ -15,14 +15,14 @@ router.get("/", async (req, res) => {
     }
 
     try {
-        const response = await addFavorite(mangaId, userId);
+        const response = await checkFavoriteExists(userId, mangaId);
         
         // Send the response based on the result of addMangaWithGenres
-        if (!response) {
-            res.status(500).json({ error: "Failed to add favorite manga" });
-            return;
-        }
-
+        // if (!response) {
+        //     res.status(500).json({ error: "Failed to delete favorite manga" });
+        //     return;
+        // }
+        console.log(response);
         // Send the response based on the result of addMangaWithGenres
         res.status(200).json(response);
     } catch (error) {

@@ -13,6 +13,7 @@ import getRatingFromMangaUserRoute from './routes/getRatingFromMangaUserRoute';
 import addFavoriteRoutes from './routes/addFavoriteRoutes'; 
 import getFavoriteManga from './routes/getFavoriteManga'; 
 import deleteFavoriteRoutes from './routes/deleteFavoriteRoutes'; 
+import checkFavoriteExistsRoutes from './routes/checkFavoriteExistsRoutes'; 
 
 export default (app: Application) => {
   // Define your routes here
@@ -31,6 +32,7 @@ export default (app: Application) => {
   app.use('/addFavorite',addFavoriteRoutes);
   app.use('/getFavoriteManga',getFavoriteManga);
   app.use('/deleteFavorite',deleteFavoriteRoutes);
+  app.use('/checkFavorite',checkFavoriteExistsRoutes);
   // app.use('/getUserMRating',getUserMRatingWithGId);
   app.use('/test', textRoutes);
 };
