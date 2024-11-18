@@ -13,7 +13,7 @@ router.get("/", async (req, res) => {
     const genreId = req.query.genre as string;
 
     // Validate query parameters
-    if (!mangaId || isNaN(rating)) {
+    if (!mangaId || isNaN(rating) || !userId || !genreId) {
         res.status(400).json({ error: "rating, mangaId, and genre are required query parameters" });
         return;
     }
