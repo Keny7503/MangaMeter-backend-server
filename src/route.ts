@@ -20,19 +20,21 @@ export default (app: Application) => {
   app.get('/', (req, res) => {
     res.send('Hello from the API');
   });
+  
   app.use('/manga/search', searchByNameRoutes);
   app.use('/genres', genreRoutes);
-  app.use('/rating', getOneRatingRoute);
-  app.use('/rating/manga/user', getRatingFromMangaUserRoute);
-  app.use('/genreUpdate',genreUpdateRoutes);
-  app.use('/addManga', addMangaRoutes);
-  app.use('/addRating',addRatingRoutes);
-  app.use('/getAverGRating',getAverGRatingRoutes);
-  app.use('/getAverMRating',getAverMRatingRoutes);
-  app.use('/addFavorite',addFavoriteRoutes);
-  app.use('/getFavoriteManga',getFavoriteManga);
-  app.use('/deleteFavorite',deleteFavoriteRoutes);
-  app.use('/checkFavorite',checkFavoriteExistsRoutes);
+  app.use('/ratings', getOneRatingRoute);
+  app.use('/ratings/manga/user', getRatingFromMangaUserRoute);
+  app.use('/genres/update', genreUpdateRoutes);
+  app.use('/manga/add', addMangaRoutes);
+  app.use('/ratings/add', addRatingRoutes);
+  app.use('/ratings/average/genre', getAverGRatingRoutes);
+  app.use('/ratings/average/manga', getAverMRatingRoutes);
+  app.use('/favorites/add', addFavoriteRoutes);
+  app.use('/favorites', getFavoriteManga);
+  app.use('/favorites/delete', deleteFavoriteRoutes);
+  app.use('/favorites/check', checkFavoriteExistsRoutes);
+
   // app.use('/getUserMRating',getUserMRatingWithGId);
   app.use('/test', textRoutes);
 };
