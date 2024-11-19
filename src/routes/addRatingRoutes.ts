@@ -6,7 +6,7 @@ import { doesMangaExist } from '../utils/doesMangaExist';
 const router = Router();
 
 // Define a route that uses query parameters for rating, mangaName, mangaId, genre, userId, and RatedManga
-router.get("/", async (req, res) => {
+router.post("/", async (req, res) => {
     const rating = parseFloat(req.query.rating as string);
     const mangaId = req.query.mangaId as string;
     const userId = req.query.userId as string;

@@ -4,7 +4,7 @@ import { deleteFavoriteManga } from '../services/deleteFavoriteManga'; // Import
 const router = Router();
 
 // Define a route that uses query parameters for mangaName, mangaId, and genre
-router.get("/", async (req, res) => {
+router.delete("/", async (req, res) => {
     const mangaId = req.query.mangaId as string;
     const userId = req.query.userId as string;
 

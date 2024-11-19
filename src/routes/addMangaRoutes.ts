@@ -4,7 +4,7 @@ import { addMangaWithGenres } from '../services/addMangaWithGenres'; // Import t
 const router = Router();
 
 // Define a route that uses query parameters for mangaName, mangaId, and genre
-router.get("/", async (req, res) => {
+router.post("/", async (req, res) => {
     const mangaId = req.query.mangaId as string;
 
     // Validate query parameters
