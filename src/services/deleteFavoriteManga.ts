@@ -22,7 +22,7 @@ export async function deleteFavoriteManga(mangaId: string, userId: string) {
         // }
 
         // Return the data if necessary for further handling
-        return data;
+        return true;
     } catch (error) {
         // More specific error message handling
         console.error("Error during deleteFavoriteManga operation:", error instanceof Error ? error.message : error);

@@ -3,9 +3,14 @@ import { filterMangaDetails } from "../utils/searchEntryFilter";
 import { fetchCoverArt } from "../utils/fetchCoverArt";
 import { SearchMangaWithIds } from "../utils/SearchMangaWithIds";
 import { getUserFavorite } from "../utils/getUserFavorite";
+import { getFavoriteCountByUser } from "./getFavoriteCount";
 
 export async function SearchFavoriteManga(userId: string, limit: number, page: number) {
     try {
+        const count = await getFavoriteCountByUser(userId);
+        if(count === 0){
+            return null;
+        }
         const favorite = await getUserFavorite(userId, limit, page);
 
         // Ensure the getUserFavorite call succeeded and data is defined
@@ -45,7 +50,7 @@ export async function SearchFavoriteManga(userId: string, limit: number, page: n
 
         return {
             data: mangaDetailsArray,
-            total: result.length,
+            total: count,
             success: true
         };
 

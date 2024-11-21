@@ -1,20 +1,33 @@
 import { Router } from 'express';
 import { addFavorite } from '../services/addFavorite'; // Import the function
+import { doesMangaExist } from '../utils/doesMangaExist';
+import { addMangaWithGenres } from '../services/addMangaWithGenres';
 
 const router = Router();
 
 // Define a route that uses query parameters for mangaName, mangaId, and genre
-router.get("/", async (req, res) => {
+router.post("/", async (req, res) => {
     const mangaId = req.query.mangaId as string;
     const userId = req.query.userId as string;
 
     // Validate query parameters
-    if (!mangaId) {
+    if (!mangaId || !userId) {
         res.status(400).json({ error: "mangaId, userId is required query parameters" });
         return;
     }
 
     try {
+        const mangaExist = await !doesMangaExist(mangaId);
+        console.log(mangaExist)
+
+        if(!mangaExist){
+            const mangaResult =  await addMangaWithGenres(mangaId);
+            if (!mangaResult) {
+                res.status(500).json({ error: "Failed to add rating with genres" });
+                return;
+            }
+            console.log("Manga Added:" +mangaResult)
+        }
         const response = await addFavorite(mangaId, userId);
         
         // Send the response based on the result of addMangaWithGenres

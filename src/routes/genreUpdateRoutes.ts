@@ -4,7 +4,7 @@ import { Router } from 'express';
 const router = Router();
 
 // Define the route to fetch all genres and insert them into the Supabase database
-router.get("/", async (req, res) => {
+router.patch("/", async (req, res) => {
     try {
         // Call updateGenres, which fetches and inserts genres
         const genres = await updateGenres();
