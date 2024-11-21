@@ -3,6 +3,9 @@ import express, { Application, Request, Response, NextFunction } from 'express';
 import cors from 'cors';
 import morgan from 'morgan';
 import http from 'http';
+import swaggerJsdoc from 'swagger-jsdoc';
+import swaggerUi from 'swagger-ui-express';
+import swaggerConfig from './swaggerConfig';
 require('dotenv').config();
 
 const App: Application = express();
@@ -36,10 +39,7 @@ export function testfn(){
     return '123';
 }
 
-import { fetchGenres } from './services/genreList';
-(async () => {
-  // Test the fetchGenres function locally
-  await fetchGenres();
-})();
+const swaggerDocs = swaggerJsdoc(swaggerConfig);
+App.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocs));
 // expose app
 export default App;
