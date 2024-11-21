@@ -1,5 +1,7 @@
 import { Router } from 'express';
 import { addFavorite } from '../services/addFavorite'; // Import the function
+import { doesMangaExist } from '../utils/doesMangaExist';
+import { addMangaWithGenres } from '../services/addMangaWithGenres';
 
 const router = Router();
 
@@ -15,6 +17,17 @@ router.post("/", async (req, res) => {
     }
 
     try {
+        const mangaExist = await !doesMangaExist(mangaId);
+        console.log(mangaExist)
+
+        if(!mangaExist){
+            const mangaResult =  await addMangaWithGenres(mangaId);
+            if (!mangaResult) {
+                res.status(500).json({ error: "Failed to add rating with genres" });
+                return;
+            }
+            console.log("Manga Added:" +mangaResult)
+        }
         const response = await addFavorite(mangaId, userId);
         
         // Send the response based on the result of addMangaWithGenres
