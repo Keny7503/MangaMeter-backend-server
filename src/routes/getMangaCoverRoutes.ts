@@ -5,12 +5,12 @@ const router = Router();
 
 // Define the route to fetch all genres
 router.get("/", async (req, res) => {
-    const coverArtId = req.query.coverArtId as string;
+    const mangaId = req.query.mangaId as string;
     const coverFileName = req.query.coverFileName as string;
 
     try {
         // const art = await getMangaCover(mangaId, coverFileName);
-        const art = await getMangaCover(coverArtId,coverFileName);
+        const art = await getMangaCover(mangaId,coverFileName);
         res.set('Content-Type', art.headers['content-type']);
         console.log(art);
         res.send(art.data);
