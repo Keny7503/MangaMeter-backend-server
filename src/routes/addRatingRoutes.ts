@@ -5,6 +5,82 @@ import { doesMangaExist } from '../utils/doesMangaExist';
 
 const router = Router();
 
+/**
+ * @swagger
+ * /manga/ratings/add:
+ *   post:
+ *     summary: Add a rating for a manga, and add the manga with its genres if it doesn't exist
+ *     tags:
+ *       - Manga
+ *     description: Adds a rating for a manga. If the manga does not exist, it will first be added to the database along with its genres.
+ *     parameters:
+ *       - in: query
+ *         name: rating
+ *         required: true
+ *         schema:
+ *           type: number
+ *           format: float
+ *         description: The rating to assign to the manga (e.g., 4.5).
+ *       - in: query
+ *         name: mangaId
+ *         required: true
+ *         schema:
+ *           type: string
+ *         description: The ID of the manga being rated.
+ *       - in: query
+ *         name: userId
+ *         required: true
+ *         schema:
+ *           type: string
+ *         description: The ID of the user providing the rating.
+ *       - in: query
+ *         name: genre
+ *         required: true
+ *         schema:
+ *           type: string
+ *         description: The ID of the genre for the manga.
+ *     responses:
+ *       200:
+ *         description: Manga rating successfully added. Manga and genres are also added if they did not exist.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 success:
+ *                   type: boolean
+ *                 data:
+ *                   type: object
+ *                   properties:
+ *                     ratingResult:
+ *                       type: object
+ *                       description: Details about the rating addition.
+ *       400:
+ *         description: Missing required query parameters (rating, mangaId, genre, userId).
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 error:
+ *                   type: string
+ *                   example: "rating, mangaId, and genre are required query parameters"
+ *       500:
+ *         description: Internal server error or failure in adding manga or rating.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 error:
+ *                   type: string
+ *                   example: "Failed to add manga and rating"
+ *                 details:
+ *                   type: string
+ *                   description: Additional error details.
+ */
+
+
 // Define a route that uses query parameters for rating, mangaName, mangaId, genre, userId, and RatedManga
 router.post("/", async (req, res) => {
     const rating = parseFloat(req.query.rating as string);
