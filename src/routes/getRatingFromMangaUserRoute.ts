@@ -3,6 +3,67 @@ import { getRatingFromMangaUser } from '../services/getRatingFromMangaUser';
 
 const router = Router();
 
+/**
+ * @swagger
+ * /user/ratings/manga/get:
+ *   get:
+ *     summary: Retrieve ratings for a specific manga and user
+ *     tags:
+ *       - Ratings
+ *     description: Fetches the rating score for a specific manga given by a user.
+ *     parameters:
+ *       - in: query
+ *         name: mangaId
+ *         required: true
+ *         schema:
+ *           type: string
+ *         description: The unique identifier of the manga.
+ *       - in: query
+ *         name: userId
+ *         required: true
+ *         schema:
+ *           type: string
+ *         description: The unique identifier of the user.
+ *     responses:
+ *       200:
+ *         description: Successfully retrieved the rating score.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 ratingscores:
+ *                   type: array
+ *                   items:
+ *                     type: number
+ *                   description: A list of ratings the user has given to the manga.
+ *                   example: [4.5, 3.8]
+ *       400:
+ *         description: Missing required query parameters.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 error:
+ *                   type: string
+ *                   example: "mangaId and userId are required query parameters."
+ *       500:
+ *         description: Failed to retrieve the rating score due to server error.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 error:
+ *                   type: string
+ *                   example: "Failed to fetch rating."
+ *                 details:
+ *                   type: string
+ *                   example: "Detailed error information."
+ */
+
+
 // Define the route to fetch all genres
 router.get("/", async (req, res) => {
     const mangaId = req.query.mangaId as string;
