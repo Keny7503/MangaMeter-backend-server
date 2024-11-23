@@ -14,6 +14,8 @@ import addFavoriteRoutes from './routes/addFavoriteRoutes';
 import getFavoriteManga from './routes/getFavoriteManga'; 
 import deleteFavoriteRoutes from './routes/deleteFavoriteRoutes'; 
 import checkFavoriteExistsRoutes from './routes/checkFavoriteExistsRoutes'; 
+import getMangaCoverRoutes from './routes/getMangaCoverRoutes'; 
+import getSuggestionRoutes from './routes/getSuggestionRoutes'; 
 
 export default (app: Application) => {
   // Define your routes here
@@ -34,6 +36,8 @@ export default (app: Application) => {
   app.use('/user/favorites/get', getFavoriteManga);
   app.use('/user/favorites/manga/delete', deleteFavoriteRoutes);
   app.use('/user/favorites/manga/get', checkFavoriteExistsRoutes);
+  app.use('/manga/art/get', getMangaCoverRoutes);
+  app.use('/manga/suggestion/get', getSuggestionRoutes);
 
   // app.use('/getUserMRating',getUserMRatingWithGId);
   app.use('/test', textRoutes);
