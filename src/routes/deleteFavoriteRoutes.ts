@@ -3,6 +3,75 @@ import { deleteFavoriteManga } from '../services/deleteFavoriteManga'; // Import
 
 const router = Router();
 
+/**
+ * @swagger
+ * /user/favorites/manga/delete:
+ *   delete:
+ *     summary: Remove a manga from the user's favorites
+ *     tags:
+ *       - User
+ *     description: Deletes a manga from the user's favorite list if it exists.
+ *     parameters:
+ *       - in: query
+ *         name: mangaId
+ *         required: true
+ *         schema:
+ *           type: string
+ *         description: The ID of the manga to be removed from favorites.
+ *       - in: query
+ *         name: userId
+ *         required: true
+ *         schema:
+ *           type: string
+ *         description: The ID of the user whose favorite manga is to be removed.
+ *     responses:
+ *       200:
+ *         description: Successfully removed the manga from the user's favorites.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *                   description: A success message.
+ *                   example: "Favorite manga deleted successfully."
+ *                 data:
+ *                   type: object
+ *                   description: Information about the deleted record.
+ *       400:
+ *         description: Missing required query parameters (mangaId or userId).
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 error:
+ *                   type: string
+ *                   example: "Both mangaId and userId are required query parameters."
+ *       404:
+ *         description: No matching favorite manga found to delete.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *                   example: "No matching favorite manga found to delete."
+ *       500:
+ *         description: Internal server error or failure during deletion.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 error:
+ *                   type: string
+ *                   example: "An internal server error occurred."
+ */
+
+
 // Define a route that uses query parameters for mangaId and userId
 router.delete("/", async (req, res) => {
     const mangaId = req.query.mangaId as string;
