@@ -26,10 +26,23 @@ const router = Router();
  *             schema:
  *               type: object
  *               properties:
- *                 success:
- *                   type: boolean
- *                 message:
+ *                 mangaName:
  *                   type: string
+ *                   example: "Yondome wa Iya na Shizokusei Majutsushi"
+ *                 mangaId:
+ *                   type: string
+ *                   example: "10e98722-874d-48b2-a715-90bb8af93598"
+ *                 genreTags:
+ *                   type: array
+ *                   items:
+ *                      type: object
+ *                      properties:
+ *                        id:
+ *                          type: string
+ *                          example: "391b0423-d847-456f-aff0-8b0cfc03066b"
+ *                        name:
+ *                          type: string
+ *                          example: "Action"
  *       400:
  *         description: Missing required query parameters (mangaId).
  *         content:

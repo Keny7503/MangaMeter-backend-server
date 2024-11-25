@@ -9,7 +9,7 @@ const router = Router();
  *   get:
  *     summary: Retrieve average rating for a specific manga
  *     tags:
- *       - Ratings
+ *       - Manga
  *     description: Fetches the average rating for a specific manga using its manga ID.
  *     parameters:
  *       - in: query
@@ -26,15 +26,26 @@ const router = Router();
  *             schema:
  *               type: object
  *               properties:
- *                 mangaId:
- *                   type: string
- *                   description: The unique identifier for the manga.
- *                 averageRating:
- *                   type: number
- *                   description: The average rating for the manga.
+ *                 data:
+ *                   type: array
+ *                   description: A list of genres with their corresponding average ratings.
+ *                   items:
+ *                     type: object
+ *                     properties:
+ *                       genreid:
+ *                         type: string
+ *                         description: The unique identifier for the genre.
+ *                         example: "4d32cc48-9f00-4cca-9b5a-a839f0764984"
+ *                       averagerating:
+ *                         type: number
+ *                         description: The average rating for the genre.
+ *                         example: 1
  *               example:
- *                 mangaId: "12345"
- *                 averageRating: 4.7
+ *                 data:
+ *                   - genreid: "4d32cc48-9f00-4cca-9b5a-a839f0764984"
+ *                     averagerating: 1
+ *                   - genreid: "e5301a23-ebd9-49dd-a0cb-2add944c7fe9"
+ *                     averagerating: 9
  *       400:
  *         description: Missing required query parameter.
  *         content:

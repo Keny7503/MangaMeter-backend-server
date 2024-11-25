@@ -54,7 +54,13 @@ const router = Router();
  *                   properties:
  *                     ratingResult:
  *                       type: object
- *                       description: Details about the rating addition.
+ *                       properties:
+ *                              success:
+ *                                  type: boolean
+ *                                  example: true
+ *                              message:
+ *                                  type: string
+ *                                  example: "rating added successfully"
  *       400:
  *         description: Missing required query parameters (rating, mangaId, genre, userId).
  *         content:

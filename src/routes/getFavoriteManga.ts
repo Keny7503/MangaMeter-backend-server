@@ -9,7 +9,7 @@ const router = Router();
  *   get:
  *     summary: Retrieve a user's favorite mangas
  *     tags:
- *       - Favorites
+ *       - User
  *     description: Fetches the list of a user's favorite mangas with pagination support.
  *     parameters:
  *       - in: query

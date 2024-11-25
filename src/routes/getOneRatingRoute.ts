@@ -9,7 +9,7 @@ const router = Router();
  *   get:
  *     summary: Retrieve the rating for a specific manga, genre, and user
  *     tags:
- *       - Ratings
+ *       - User
  *     description: Fetches the rating score for a specific manga, genre, and user.
  *     parameters:
  *       - in: query

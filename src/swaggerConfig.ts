@@ -15,7 +15,7 @@ const swaggerOptions = {
         },
       ],
     },
-    apis: ['./src/routes/*.ts'], // Adjust the path
+    apis: ['./src/routes/**/*.ts'], // Adjust the path
   };
   
   export default swaggerOptions;

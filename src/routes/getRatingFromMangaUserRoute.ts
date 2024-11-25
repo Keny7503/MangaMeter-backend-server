@@ -9,7 +9,7 @@ const router = Router();
  *   get:
  *     summary: Retrieve ratings for a specific manga and user
  *     tags:
- *       - Ratings
+ *       - User
  *     description: Fetches the rating score for a specific manga given by a user.
  *     parameters:
  *       - in: query
@@ -30,14 +30,16 @@ const router = Router();
  *         content:
  *           application/json:
  *             schema:
- *               type: object
- *               properties:
- *                 ratingscores:
- *                   type: array
- *                   items:
+ *               type: array
+ *               items:
+ *                 type: object
+ *                 properties:
+ *                   genreid:
+ *                     type: string
+ *                     example: 33771934-028e-4cb3-8744-691e866a923e
+ *                   ratingscores:
  *                     type: number
- *                   description: A list of ratings the user has given to the manga.
- *                   example: [4.5, 3.8]
+ *                     example: 2
  *       400:
  *         description: Missing required query parameters.
  *         content:

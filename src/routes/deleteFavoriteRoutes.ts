@@ -36,9 +36,9 @@ const router = Router();
  *                   type: string
  *                   description: A success message.
  *                   example: "Favorite manga deleted successfully."
- *                 data:
- *                   type: object
- *                   description: Information about the deleted record.
+ *                 success:
+ *                   type: boolean
+ *                   description: Delete successfully.
  *       400:
  *         description: Missing required query parameters (mangaId or userId).
  *         content:

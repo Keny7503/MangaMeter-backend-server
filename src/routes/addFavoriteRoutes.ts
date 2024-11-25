@@ -38,6 +38,7 @@ const router = Router();
  *                   type: boolean
  *                 message:
  *                   type: string
+ *                   example: "favorite added successfully"
  *       400:
  *         description: Missing required query parameters.
  *         content:

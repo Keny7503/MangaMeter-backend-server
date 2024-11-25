@@ -35,9 +35,6 @@ const router = Router();
  *                 exists:
  *                   type: boolean
  *                   description: Indicates whether the manga is in the user's favorites.
- *                 message:
- *                   type: string
- *                   description: Additional information about the check.
  *       400:
  *         description: Missing required query parameters (mangaId, userId).
  *         content:
