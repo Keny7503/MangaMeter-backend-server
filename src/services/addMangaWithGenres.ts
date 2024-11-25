@@ -36,7 +36,6 @@ export async function addMangaWithGenres(mangaId: string) {
                 mangaName,
                 mangaId,
                 genreTags,
-                addedGenres,
             }
         };
         // console.log(result);

@@ -5,6 +5,62 @@ import { addMangaWithGenres } from '../services/addMangaWithGenres';
 
 const router = Router();
 
+/**
+ * @swagger
+ * /user/favorites/manga/add:
+ *   post:
+ *     summary: Add a manga to the user's favorites list
+ *     tags: 
+ *       - User
+ *     description: Adds a manga to the user's favorite list. If the manga doesn't exist, it will also be added with its genres.
+ *     parameters:
+ *       - in: query
+ *         name: mangaId
+ *         required: true
+ *         schema:
+ *           type: string
+ *         description: The ID of the manga to be added.
+ *       - in: query
+ *         name: userId
+ *         required: true
+ *         schema:
+ *           type: string
+ *         description: The ID of the user adding the manga to favorites.
+ *     responses:
+ *       200:
+ *         description: Manga successfully added to the user's favorites.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 success:
+ *                   type: boolean
+ *                 message:
+ *                   type: string
+ *                   example: "favorite added successfully"
+ *       400:
+ *         description: Missing required query parameters.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 error:
+ *                   type: string
+ *                   example: "mangaId, userId is required query parameters"
+ *       500:
+ *         description: Internal server error or failure in adding the manga.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 error:
+ *                   type: string
+ *                   example: "Failed to add favorite manga"
+ */
+
 // Define a route that uses query parameters for mangaName, mangaId, and genre
 router.post("/", async (req, res) => {
     const mangaId = req.query.mangaId as string;
