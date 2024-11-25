@@ -40,6 +40,6 @@ export function testfn(){
 }
 
 const swaggerDocs = swaggerJsdoc(swaggerConfig);
-App.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocs));
+App.use('/docs', swaggerUi.serve, swaggerUi.setup(swaggerDocs));
 // expose app
 export default App;
